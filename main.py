@@ -50,6 +50,7 @@ def apply_filters(trades, dataset):
 
     return filtered_trades
 
+
 def calculate_statistics(filtered_trades):
     long_trades = [trade for trade in filtered_trades if trade['side'].upper() == 'LONG']
     short_trades = [trade for trade in filtered_trades if trade['side'].upper() == 'SHORT']
