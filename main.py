@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 from dataset import Dataset
 from utils import TimeFrame
 
-Symbol = 'BTCUSDT'
+Symbol = 'ETHUSDT'
 INITIAL_AMOUNT = 20000
 
 
@@ -81,7 +81,7 @@ def calculate_statistics(filtered_trades):
     print_trade_stats(short_trades, "Short Trades")
 
 
-trades = read_trades_from_csv('TradesListBy_Klines-BTCUSDT-1m.csv')
+trades = read_trades_from_csv('TradesList-ETH11.csv')
 start_date, end_date = get_date_range(trades)
 dataset = fetch_market_data(Symbol, TimeFrame(1, 'm'), start_date, end_date)
 
