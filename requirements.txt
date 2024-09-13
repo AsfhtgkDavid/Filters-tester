@@ -10,4 +10,8 @@ psutil==5.9.8
 tornado==6.4
 traitlets==5.14.3
 yfinance==0.2.40
-
+numpy==1.26.4
+pandas-ta==0.3.14b0
+setuptools==74.1.2
+python-binance==1.0.19
+sqlalchemy==2.0.34
