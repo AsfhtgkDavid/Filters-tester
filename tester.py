@@ -28,7 +28,7 @@ def fetch_market_data(symbol, timeframe, start, end):
     return Dataset.make(symbol=symbol, timeframe=timeframe, start=start, end=end)
 
 
-def apply_filters(trades, dataset, long_filters=[['RSI_14', '<', 30], ['CCI_14_0.015', '<', -100]], short_filters=[['RSI_14', '>', 70], ['CCI_14_0.015', '>', 100]]):
+def apply_filters(trades, dataset, long_filters=(('RSI_14', '<', 30), ('CCI_14_0.015', '<', -100)), short_filters=(('RSI_14', '>', 70), ('CCI_14_0.015', '>', 100))):
     filtered_trades = []
 
     for trade in trades:
@@ -42,20 +42,20 @@ def apply_filters(trades, dataset, long_filters=[['RSI_14', '<', 30], ['CCI_14_0
         side = trade['side'].upper()
         valid_trade = True
         filters = long_filters if side == 'LONG' else short_filters
-        
+
         for filter_condition in filters:
             column, operator, value = filter_condition
             if operator == '<':
-                if not matching_row[column].values[0] < value:
+                if not (matching_row[column].values[0] < value):
                     valid_trade = False
                     break
             elif operator == '>':
-                if not matching_row[column].values[0] > value:
+                if not (matching_row[column].values[0] > value):
                     valid_trade = False
                     break
             else:
                 raise ValueError(f"Unsupported operator: {operator}")
-        
+
         if valid_trade:
             filtered_trades.append(trade)
 
@@ -93,7 +93,6 @@ def calculate_statistics(filtered_trades):
 
 if __name__ == '__main__':
     Symbol = 'ETHUSDT'
-    INITIAL_AMOUNT = 20000
 
     trades = read_trades_from_csv('TradesList-ETH11-min.csv')
     start_date, end_date = get_date_range(trades)
